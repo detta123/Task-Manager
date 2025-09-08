@@ -1,6 +1,5 @@
 'use server';
 
-import { run } from 'genkit';
 import { suggestTaskPriorityFlow } from '@/ai/flows/suggestTaskPriority';
 import { z } from 'zod';
 
@@ -12,7 +11,7 @@ export async function suggestTaskPriorityAction(taskDescription: string): Promis
   }
   
   try {
-    const { priority } = await run(suggestTaskPriorityFlow, { taskDescription });
+    const { priority } = await suggestTaskPriorityFlow({ taskDescription });
     const validatedPriority = PriorityEnum.parse(priority);
     return { priority: validatedPriority };
   } catch (error) {
